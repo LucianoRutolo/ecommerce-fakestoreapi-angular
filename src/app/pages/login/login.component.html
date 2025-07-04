@@ -1,0 +1,50 @@
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="height: 90dvh"
+>
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="login()"
+    class="border p-4 rounded shadow"
+    style="min-width: 320px; max-width: 400px; width: 100%"
+  >
+    <h2 class="text-center mb-4">Login</h2>
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+        [ngClass]="{ 'is-invalid': hasErrors('username', 'required') }"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Pasword</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        [ngClass]="{
+          'is-invalid': hasErrors('password', 'required')
+        }"
+      />
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="remember" formControlName="rememberMe"/>
+      <label class="form-check-label" for="remember">Remember me</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+    @if (loginError) {
+    <small class="text-danger">Incorrect username or password</small>
+    }
+    <div class="mt-3 text-center">
+      <a href="#" class="text-decoration-none">¿Forgot your password?</a>
+    </div>
+  </form>
+</div>

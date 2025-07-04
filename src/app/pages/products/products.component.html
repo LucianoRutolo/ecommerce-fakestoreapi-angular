@@ -1,0 +1,78 @@
+<div class="container-xl mt-4">
+  <div class="row" style="margin-top: 16px">
+    <aside class="col-12 col-lg-3 container-fluid">
+      <h5>Filters</h5>
+      <div class="mb-3">
+        <h6>Categories</h6>
+          <select
+            id="categories"
+            class="form-select form-select-sm"
+            (change)="onCategoryChange($event)"
+          >
+            <option value="">-- All --</option>
+            @if (categories) {
+              @for (c of categories; track $index) {
+                <option value="{{ c }}">{{ c }}</option>
+              }
+            }
+          </select>
+
+      </div>
+      <div class="mb-3">
+        <h6>Sort by price</h6>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="rd-sort"
+            id="none"
+            value=""
+            (change)="onSortChange($event)"
+            checked
+          />
+          <label class="form-check-label" for="none"> None </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="rd-sort"
+            id="high-to-low"
+            value="high-to-low"
+            (change)="onSortChange($event)"
+          />
+          <label class="form-check-label" for="high-to-low">
+            High to low
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="rd-sort"
+            id="low-to-high"
+            value="low-to-high"
+            (change)="onSortChange($event)"
+          />
+          <label class="form-check-label" for="low-to-high">
+            Low to high
+          </label>
+        </div>
+      </div>
+    </aside>
+
+
+    
+    <main class="col-12 col-lg-9 container-fluid">
+      <h2>List of all products</h2>
+
+      <hr />
+      @defer (when products) {
+        @for (p of products; track $index) {
+          <app-product-card [product]="p" />
+        }
+      }
+      
+    </main>
+  </div>
+</div>

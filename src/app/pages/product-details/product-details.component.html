@@ -1,0 +1,40 @@
+<div class="container-xl product-detail">
+  @if (product){
+  <div class="product-detail__image-container">
+    <img
+      class="product-detail__image"
+      [src]="product.image"
+      [alt]="product.title"
+    />
+  </div>
+
+  <div class="product-detail__info">
+    <h1 class="product-detail__title">{{ product.title }}</h1>
+
+    <div class="product-detail__rating">
+      <span>{{ product!.rating.rate }} ⭐</span>
+      <span class="product-detail__rating-count"
+        >({{ product!.rating.count }} rates)</span
+      >
+    </div>
+
+    <div class="product-detail__price">
+      {{ product.price | currency : "USD" : "symbol" : "1.2-2" }}
+    </div>
+
+    <p class="product-detail__description">{{ product.description }}</p>
+    @if (!isInCart) {
+    <button class="product-detail__buy-button" (click)="addToCart(product.id)">
+      Add to cart
+    </button>
+    } @else {
+    <button
+      class="product-detail__buy-button"
+      (click)="removeToCart(product.id)"
+    >
+      Added
+    </button>
+    }
+  </div>
+  }
+</div>

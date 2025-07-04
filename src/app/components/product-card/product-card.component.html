@@ -1,0 +1,42 @@
+<div class="product-card">
+  <div class="product-card__img-container">
+    <a
+      [routerLink]="['/products', product.id]"
+      [attr.aria-label]="'View product details ' + product.title"
+    ></a>
+    <img
+      class="product-card__img"
+      [src]="product.image"
+      [alt]="product.title"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="product-card__info-container">
+    <h5 class="product-card__title">
+      <a
+        [routerLink]="['/products', product.id]"
+        [attr.aria-label]="'View product details ' + product.title"
+        >{{ product.title }}</a
+      >
+    </h5>
+    <div class="product-card__rating">
+      <span>{{ product.rating.rate }} ⭐</span>
+      <span class="product-card__rating-count"
+        >({{ product.rating.count }})</span
+      >
+    </div>
+    <span class="product-card__price">{{
+      product.price | currency : "USD" : "symbol" : "1.2-2"
+    }}</span>
+    @if (!isInCart) {
+    <button class="product-card__buy-button" (click)="addToCart(product.id)">
+      Add to cart
+    </button>
+    } @else {
+    <button class="product-card__buy-button" (click)="removeToCart(product.id)">
+      Added
+    </button>
+    }
+  </div>
+</div>
